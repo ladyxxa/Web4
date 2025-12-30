@@ -1,4 +1,4 @@
-﻿/* Базовые стили и сброс */
+﻿
 * {
     margin: 0;
     padding: 0;
@@ -33,7 +33,6 @@ body {
     position: relative;
 }
 
-    /* Фоны для разных условий погоды */
     body.day {
         background: linear-gradient(135deg, #87CEEB 0%, #E0F7FF 100%);
     }
@@ -96,7 +95,6 @@ body {
         background: rgba(255, 255, 255, 0.2) !important;
     }
 
-/* Контейнер */
 .container {
     max-width: 1400px;
     margin: 0 auto;
@@ -107,7 +105,6 @@ body {
     min-height: 100vh;
 }
 
-/* Кнопка меню для мобильных */
 .menu-toggle {
     display: none;
     position: fixed;
@@ -130,7 +127,6 @@ body {
         background: var(--primary-dark);
     }
 
-/* Левая панель с городами */
 .cities-sidebar {
     display: flex;
     flex-direction: column;
@@ -291,7 +287,6 @@ body.night .city-weather-desc {
         transform: scale(1.05);
     }
 
-/* Шапка приложения */
 .header {
     grid-column: 1 / -1;
     display: flex;
