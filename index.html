@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Кнопка меню для мобильных -->
+    <button id="menuToggle" class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Оверлей для закрытия меню на мобильных -->
+    <div id="mobileOverlay" class="mobile-overlay"></div>
+
+    <div class="container">
+        <!-- Шапка приложения -->
+        <header class="header">
+            <h1><i class="fas fa-cloud-sun"></i> Прогноз погоды</h1>
+            <div class="header-controls">
+                <button id="refreshBtn" class="btn btn-primary">
+                    <i class="fas fa-sync-alt"></i> Обновить
+                </button>
+                <button id="addCityBtn" class="btn btn-secondary">
+                    <i class="fas fa-plus"></i> Добавить город
+                </button>
+            </div>
+        </header>
+
+        <!-- Левая панель с городами -->
+        <div class="cities-sidebar" id="citiesSidebar">
+            <!-- Карточки городов будут добавлены динамически -->
+        </div>
+
+        <!-- Состояния загрузки/ошибки -->
+        <div id="loadingState" class="state-container">
+            <div class="spinner"></div>
+            <p>Загрузка данных о погоде...</p>
+        </div>
+
+        <div id="errorState" class="state-container hidden">
+            <i class="fas fa-exclamation-triangle error-icon"></i>
+            <p id="errorMessage">Произошла ошибка при загрузке данных</p>
+            <button id="retryBtn" class="btn btn-primary">Повторить</button>
+        </div>
+
+        <!-- Основной контент -->
+        <main id="mainContent" class="hidden">
+            <!-- Прогноз погоды -->
+            <div class="weather-container">
+                <div class="current-weather">
+                    <div class="location-info">
+                        <h2 id="currentCity">Текущее местоположение</h2>
+                        <div class="local-time">
+                            <i class="fas fa-clock"></i>
+                            <span id="currentTime" class="date"></span>
+                        </div>
+                    </div>
+                    <div class="weather-main">
+                        <div class="temp-section">
+                            <div class="current-temp">
+                                <span id="currentTemp" class="temp-value">--</span>
+                                <span class="temp-unit">°C</span>
+                            </div>
+                            <div class="weather-desc">
+                                <div class="weather-icon-container">
+                                    <i id="weatherIcon" class="fas fa-sun"></i>
+                                </div>
+                                <p id="weatherDescription" class="desc-text">--</p>
+                            </div>
+                        </div>
+                        <div class="weather-details">
+                            <div class="detail-item">
+                                <i class="fas fa-wind"></i>
+                                <div class="detail-info">
+                                    <span class="detail-label">Ветер</span>
+                                    <span id="windSpeed" class="detail-value">-- км/ч</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-tint"></i>
+                                <div class="detail-info">
+                                    <span class="detail-label">Влажность</span>
+                                    <span id="humidity" class="detail-value">-- %</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <div class="detail-info">
+                                    <span class="detail-label">Давление</span>
+                                    <span id="pressure" class="detail-value">-- гПа</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-thermometer-half"></i>
+                                <div class="detail-info">
+                                    <span class="detail-label">Ощущается как</span>
+                                    <span id="feelsLike" class="detail-value">-- °C</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Прогноз на следующие дни -->
+                <div class="forecast-section">
+                    <h3 class="forecast-title">Прогноз на 3 дня</h3>
+                    <div class="forecast-days" id="forecastContainer">
+                        <div class="forecast-days forecast-days-mobile" id="forecastContainer">
+                            <!-- Прогноз будет добавлен динамически -->
+                        </div>
+                    </div>
+            </div>
+        </main>
+
+        <!-- Модальное окно для добавления города -->
+        <div id="addCityModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Добавить город</h2>
+                    <button id="closeModalBtn" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="cityInput">Название города</label>
+                        <div class="input-with-dropdown">
+                            <input type="text" id="cityInput" placeholder="Введите название города">
+                            <div id="citySuggestions" class="suggestions-dropdown hidden">
+                                <!-- Подсказки будут добавлены динамически -->
+                            </div>
+                        </div>
+                        <div id="cityError" class="error-message hidden"></div>
+                    </div>
+                    <div class="modal-actions">
+                        <button id="cancelBtn" class="btn btn-secondary">Отмена</button>
+                        <button id="saveCityBtn" class="btn btn-primary">Добавить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
